@@ -3,7 +3,7 @@ namespace anovsiradj\primitive;
 
 class strings extends primitives
 {
-	public $__prefix__ = 'str';
+	protected $__prefix__ = 'str';
 
 	public static $FN_PREFIX_UNDERLINE = [
 		'pad',
@@ -70,9 +70,14 @@ class strings extends primitives
 		'uppercase' => 'toupper',
 	];
 
+	public function __construct($primitive = '')
+	{
+		parent::__construct($primitive);
+	}
+
 	public function __toString()
 	{
-		return $this();
+		return ((string) $this->__primitive__);
 	}
 
 	public function __call($fn_suffix, $args)
@@ -93,16 +98,17 @@ class strings extends primitives
 
 		// inconsistent argument index
 		if (isset(static::$FN_CUSTOM_INDEX[$fn_suffix])) {
+			$idx = static::$FN_CUSTOM_INDEX[$fn_suffix];
 			$new_args = [];
 			$not_ok = true;
 			for ($i=0; $i < count($args); $i++) {
-				if ($i === static::$FN_CUSTOM_INDEX[$fn_suffix]) {
+				if ($idx === $i) {
 					$not_ok = false;
 					$new_args[] = $this->__primitive__;
 				}
 				$new_args[] = $args[$i];
 			}
-			if ($not_ok) $new_args[static::$FN_CUSTOM_INDEX[$fn_suffix]] = $this->__primitive__; // forced
+			if ($not_ok) $new_args[$idx] = $this->__primitive__; // forced
 			$args = $new_args;
 
 		// default argument 0
@@ -111,9 +117,7 @@ class strings extends primitives
 		/* DEBUG-3 */ if ($this->__breakpoint__[3]) { var_dump($fn,$fn_suffix,$args); die(); }
 
 		// direct return
-		if (in_array($fn_suffix, static::$FN_DIRECT_RETURN, $fn_suffix)) {
-			return call_user_func_array($fn, $args);
-		}
+		if (in_array($fn_suffix, static::$FN_DIRECT_RETURN)) return call_user_func_array($fn,$args);
 
 		/* DEBUG-4 */ if ($this->__breakpoint__[4]) { var_dump($fn,$fn_suffix,$args); die(); }
 
