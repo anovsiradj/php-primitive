@@ -20,10 +20,18 @@ output only string,
 if output not string,
 string will not be updated and the result will be directly returned from `__call()` (e.g `explode`) or `return ((string) false);`
 
-# numbers
+# numbers (todo)
 
 https://secure.php.net/manual/en/ref.math.php
 
 # arrays
 
 https://secure.php.net/manual/en/ref.array.php
+
+caveats
+
+- `compact()` ?
+- `extract()` not working / ignored because inside function
+- `isset()` aka `array_key_exists()`
+- `list()` is not avaiable
+- `range()` is not avaiable
