@@ -35,3 +35,11 @@ caveats
 - `isset()` aka `array_key_exists()`
 - `list()` is not avaiable
 - `range()` is not avaiable
+
+
+---
+
+License MIT.
+
+what is this? idk.
+https://stackoverflow.com/questions/6623130/scalar-vs-primitive-data-type-are-they-the-same-thing

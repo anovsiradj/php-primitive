@@ -11,16 +11,19 @@ class arrays extends primitives
 		'in_array',
 		'current','key','prev','next','end','reset',
 		'shuffle',
+		'implode',
 	];
 	public static $FN_DIRECT_RETURN = [
 		'count',
 		'in_array',
 		'key_exists',
 		'current','key','prev','next','end','reset',
+		'implode',
 	];
 	public static $FN_CUSTOM_INDEX = [
 		'in_array' => 1,
 		'key_exists' => 1,
+		'implode' => 1,
 	];
 	public static $FN_BY_REFERENCE = [
 		'unshift',
